@@ -1,4 +1,0 @@
-*.bat text eol=crlf
-*.sh text eol=lf
-*.jar binary
-*.exe binary
