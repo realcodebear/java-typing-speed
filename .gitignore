@@ -1,0 +1,9 @@
+# compiled classes
+*.class
+
+# the local database (has real accounts and passwords)
+*.db
+
+# system files
+.DS_Store
+*.log
