@@ -36,21 +36,29 @@ The database file `scores.db` is created in the same folder as the exe.
 
 ## Run from the source code
 
-You need a JDK (Java 8 or newer). Inside this folder:
+You need a JDK (Java 8 or newer). Download the **whole** project (Code → Download ZIP), including the `lib` folder.
+
+**Windows: easiest**
+
+Double-click **`run.bat`**. It compiles and starts the app with the right classpath.
+
+**Windows: by hand** (works in PowerShell and Command Prompt; keep the quotes)
+```bat
+javac -cp "lib\sqlite-jdbc-3.47.1.0.jar" *.java
+java -cp ".;lib\sqlite-jdbc-3.47.1.0.jar" Login
+```
 
 **Mac / Linux**
+```bash
+sh run.sh
+```
+or
 ```bash
 javac -cp lib/sqlite-jdbc-3.47.1.0.jar *.java
 java -cp .:lib/sqlite-jdbc-3.47.1.0.jar Login
 ```
 
-**Windows**
-```bat
-javac -cp lib\sqlite-jdbc-3.47.1.0.jar *.java
-java -cp .;lib\sqlite-jdbc-3.47.1.0.jar Login
-```
-
-If you see `No suitable driver found for jdbc:sqlite:scores.db`, the jar in `lib` is missing from the classpath (`-cp`).
+If you see `SQLite driver jar not found` or `No suitable driver found`, the jar in `lib` is not on the classpath (`-cp`). In PowerShell, the `;` must be inside quotes. Pressing **Run** in an IDE ignores `-cp`, so add the jar to the project's libraries instead.
 
 **NetBeans:** create a *Java with Ant → Java Application* project (untick "Create Main Class"), copy the three `.java` files into `src`, add `lib/sqlite-jdbc-3.47.1.0.jar` under **Libraries → Add JAR/Folder**, set the main class to `Login`, and press Run.
 
@@ -60,7 +68,8 @@ If you see `No suitable driver found for jdbc:sqlite:scores.db`, the jar in `lib
 |---|---|
 | `Login.java` | First window: login and register forms, colours and helper methods (`makeLabel`, `makeField`, `makeButton`, `makeLink`). Has `main`. |
 | `TypingTest.java` | The test: sentence, typing box, timer, results, leaderboard. Also has `ScoreRenderer`, which colours the leaderboard rows. |
-| `DB.java` | Connects to `scores.db` and creates the `users` and `scores` tables. |
+| `DB.java` | Loads the SQLite driver, connects to `scores.db` and creates the `users` and `scores` tables. |
+| `run.bat` / `run.sh` | Compile and run in one step (Windows / Mac and Linux). |
 | `lib/sqlite-jdbc-3.47.1.0.jar` | SQLite JDBC driver. |
 | `dist/TypingSpeedTest.exe` | Windows app (the code above, packed into one exe). |
 | `icon/app.ico` | App icon. |

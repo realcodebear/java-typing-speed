@@ -4,6 +4,15 @@ public class DB {
 
     // Connects to the database file scores.db (it is created if it does not exist)
     public static Connection connect() throws SQLException {
+        // Step 1 of JDBC: load the SQLite driver class from the jar in the lib folder
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("SQLite driver jar not found. Run the app with run.bat, or with: "
+                    + "java -cp \".;lib\\sqlite-jdbc-3.47.1.0.jar\" Login");
+        }
+
+        // Step 2: open the connection
         return DriverManager.getConnection("jdbc:sqlite:scores.db");
     }
 
